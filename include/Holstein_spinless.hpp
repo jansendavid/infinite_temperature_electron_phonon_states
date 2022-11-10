@@ -821,7 +821,8 @@ s = Index(q_emp,(maxOcc+1),
 
 
 
- using  Holstein_exp = MixedSiteSet<Holstein_spinlessSite_down,Holstein_spinlessSite_up>;
+      using  Holstein_purified = MixedSiteSet<Holstein_spinlessSite_down,Holstein_spinlessSite_up>;
+      using  Holstein_spinless =Holstein_spinlessSite_down;
 
 
 
