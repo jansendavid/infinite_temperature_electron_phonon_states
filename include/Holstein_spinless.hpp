@@ -6,7 +6,7 @@
 #pragma once
 #include "itensor/mps/siteset.h"
 #include "itensor/all.h"
-#include"extra.hpp"
+
 namespace itensor {
 
 
@@ -21,7 +21,7 @@ class Holstein_spinlessSite_down;
 
 using Holstein_down = BasicSiteSet<Holstein_spinlessSite_down>;
 
-using Holstein_spinless = BasicSiteSet<Holstein_spinlessSite>;  
+using Holstein_spinless = BasicSiteSet<Holstein_spinlessSite_up>;  
 
 
   // holstein up
@@ -58,9 +58,9 @@ class Holstein_spinlessSite_up
 	//     auto occVec=args.getVecInt("MaxOccVec");
 	//     maxOcc= occVec[n-1];
 	//   }
-	else{
-        maxOcc = args.getInt("MaxOcc",1);
-	}
+	//else{
+	          maxOcc = args.getInt("MaxOcc",1);
+		  //}
 	        if(not conserveQNs)
             {
 	      s = Index(2*(maxOcc+1),tags);
@@ -413,9 +413,9 @@ class Holstein_spinlessSite_up
         return Op;
         }
 
-      HolsteinSite_up(int n, Args const& args = Args::global())
+     Holstein_spinlessSite_up(int n, Args const& args = Args::global())
       {
-        *this = HolsteinSite_up({args,"SiteNumber=",n});
+        *this =Holstein_spinlessSite_up({args,"SiteNumber=",n});
       }
 };
 
@@ -458,9 +458,9 @@ class Holstein_spinlessSite_down
 	//     auto occVec=args.getVecInt("MaxOccVec");
 	//     maxOcc= occVec[n-1];
 	//   }
-	else{
-        maxOcc = args.getInt("MaxOcc",1);
-	}
+	//else{
+	          maxOcc = args.getInt("MaxOcc",1);
+		  //}
 	        if(not conserveQNs)
             {
 	      s = Index(2*(maxOcc+1),tags);
@@ -468,7 +468,7 @@ class Holstein_spinlessSite_down
         else if(not oddevenupdown) //usual case
             {
 
-	      if( conserve_Nf) //usual case
+	    	      if( conserve_Nf) //usual case
 {
 		auto q_emp = QN({"Nf",0, -1},{"Sz",0});
 		auto q_occ = QN({"Nf",1, -1},{"Sz",-1});
@@ -478,9 +478,10 @@ class Holstein_spinlessSite_down
 	      else{
 		auto q_emp = QN({"Pf",0,-2});
 		auto q_occ = QN({"Pf",1,-2});
-s = Index(q_emp,(maxOcc+1),
-                      q_occ,(maxOcc+1),Out,tags);
-            }
+		s = Index(q_emp,(maxOcc+1),
+		q_occ,(maxOcc+1),Out,tags);
+}
+}
         else
             {
             QN q_occ;
@@ -811,9 +812,9 @@ s = Index(q_emp,(maxOcc+1),
         return Op;
         }
 
-      HolsteinSite_down(int n, Args const& args = Args::global())
+      Holstein_spinlessSite_down(int n, Args const& args = Args::global())
       {
-        *this = HolsteinSite_down({args,"SiteNumber=",n});
+        *this = Holstein_spinlessSite_down({args,"SiteNumber=",n});
       }
 };
 
@@ -822,7 +823,7 @@ s = Index(q_emp,(maxOcc+1),
 
 
       using  Holstein_purified = MixedSiteSet<Holstein_spinlessSite_down,Holstein_spinlessSite_up>;
-      using  Holstein_spinless =Holstein_spinlessSite_down;
+
 
 
 
